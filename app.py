@@ -2,9 +2,6 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import os
 from datetime import datetime
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 CORS(app)
@@ -13,7 +10,7 @@ CORS(app)
 app.config['JSON_SORT_KEYS'] = False
 app.config['JSON_AS_ASCII'] = False
 
-# Data storage (in production, use a database)
+# Data storage
 services = [
     {
         'id': 1,
@@ -29,9 +26,9 @@ services = [
     },
     {
         'id': 3,
-        'title': 'Wymiana opon i konserwacja',
-        'description': 'Wymiana opon, balansowanie, naprawa felg',
-        'icon': '🛞'
+        'title': 'Wymiana opón i konserwacja',
+        'description': 'Wymiana opón, balansowanie, naprawa felg',
+        'icon': '😞'
     },
     {
         'id': 4,
@@ -42,18 +39,18 @@ services = [
     {
         'id': 5,
         'title': 'Naprawa silnika i skrzyni biegów',
-        'description': 'Profesjonalna naprawa silników i skrzyń biegów',
+        'description': 'Profesjonalna naprawa silników i skrzyń biegów',
         'icon': '🔧'
     }
 ]
 
 contact_info = {
-    'email': 'iAlmid.poznan2024@gmail.l',
-    'phone': '+731531092',
-    'address': 'mączniki 25 64-460 nowe skalmierzyce'
+    'email': 'Almid.poznan2024@gmail.com',
+    'phone': '731531092',
+    'address': 'mączniki 25 64-460 nowe skalmierzyce',
     'hours': {
-        'weekday': '8 - 20'
-        'saturday': '09:00 - 14:00',
+        'weekday': '8:00 - 20:00',
+        'saturday': '9:00 - 15:00',
         'sunday': 'Zamknięte'
     }
 }
@@ -82,15 +79,12 @@ def send_contact_message():
         if not all([name, email, message]):
             return jsonify({'success': False, 'message': 'Brak wymaganych pól'}), 400
         
-        # Validation
         if len(name) < 2:
             return jsonify({'success': False, 'message': 'Imię musi mieć co najmniej 2 znaki'}), 400
         
         if len(message) < 10:
             return jsonify({'success': False, 'message': 'Wiadomość musi mieć co najmniej 10 znaków'}), 400
         
-        # In production, send actual email
-        # For now, just log it
         print(f'\nNowa wiadomość z kontaktu:')
         print(f'Imię: {name}')
         print(f'Email: {email}')
@@ -100,9 +94,9 @@ def send_contact_message():
         
         return jsonify({
             'success': True,
-            'message': 'Wiadomość została wysłana. Odezwiemy się do Ciebie wkrótce!'
+            'message': 'Wiadomość została wysłana. Odziewiemy się do Ciebie wkrótce!'
         }), 200
-    
+        
     except Exception as e:
         print(f'Error: {str(e)}')
         return jsonify({'success': False, 'message': 'Błąd podczas wysyłania wiadomości'}), 500
