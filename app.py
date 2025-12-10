@@ -48,11 +48,11 @@ services = [
 ]
 
 contact_info = {
-    'email': 'info@almid.pl',
-    'phone': '+48 605 987 123',
-    'address': 'Poznań, Polska',
+    'email': 'iAlmid.poznan2024@gmail.l',
+    'phone': '+731531092',
+    'address': 'mączniki 25 64-460 nowe skalmierzyce'
     'hours': {
-        'weekday': '08:00 - 17:00',
+        'weekday': '8 - 20'
         'saturday': '09:00 - 14:00',
         'sunday': 'Zamknięte'
     }
